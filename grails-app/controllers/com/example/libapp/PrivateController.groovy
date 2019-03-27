@@ -47,4 +47,27 @@ class PrivateController {
     student.save flush: true // immediately hit the database at this point (flush: true)
     redirect controller: 'public', action: 'index' // function available in every controller
   }
+
+  def auth(String username, Integer password) {
+    def student = Student.findByUsernameAndPassword(username, password)
+    if (student) {
+      // valid user
+      session['student'] = student
+      redirect controller: 'home', action: 'index'
+    } else {
+      // invalid user
+      flash['authFailed'] = true
+      flash['username'] = username
+
+      redirect controller: 'public', action: 'index'
+    }
+  }
+
+  def logout() {
+    session.invalidate()
+    redirect controller: 'public'
+  }
+
+
+
 }

@@ -2,7 +2,8 @@ package com.example.libapp
 
 class PublicController {
 
-    def index() {
+    def index(String username) {
+      []
     }
 
     def register() {

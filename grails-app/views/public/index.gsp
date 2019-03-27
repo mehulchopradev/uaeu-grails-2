@@ -6,13 +6,16 @@
     <asset:stylesheet href="app.css" />
   </head>
   <body>
-    <asset:image class="banner" src="library-banner.jpg" />
-    <form>
+    <asset:image class="banner" src="library-banner.jpg" /><br>
+    <g:if test="${flash.authFailed}">
+      <b>Invalid Username Or password</b>
+    </g:if>
+    <g:form controller="private" action="auth">
       <p>
-        <input type="text" placeholder="Enter Username">
+        <g:textField name="username" placeholder="Enter Username" value="${flash.username}"/>
       </p>
       <p>
-        <input type="password" placeholder="Enter Password">
+        <input type="password" name="password" placeholder="Enter Password">
       </p>
       <p>
         <input type="submit" value="Login">&nbsp;
@@ -20,6 +23,6 @@
           New User ? Register Here
         </g:link>
       </p>
-    </form>
+    </g:form>
   </body>
 </html>

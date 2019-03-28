@@ -1,4 +1,5 @@
 package com.example.libapp
+import com.abc.LogService
 
 class User {
   String username
@@ -12,6 +13,7 @@ class User {
 }
 
 class PrivateController {
+  LogService logService
   /* def register() {
     // println params // 1 per request
     // groovy map
@@ -44,7 +46,9 @@ class PrivateController {
   }*/
 
   def register(Student student) {
+    student.username = student.username.pipefy(',')
     student.save flush: true // immediately hit the database at this point (flush: true)
+    logService.saveLog 'createStudent'
     redirect controller: 'public', action: 'index' // function available in every controller
   }
 

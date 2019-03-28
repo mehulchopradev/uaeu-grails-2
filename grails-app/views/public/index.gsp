@@ -2,11 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="layout" content="publicpage">
     <title>Login Here</title>
-    <asset:stylesheet href="app.css" />
   </head>
   <body>
-    <asset:image class="banner" src="library-banner.jpg" /><br>
     <g:if test="${flash.authFailed}">
       <b>Invalid Username Or password</b>
     </g:if>

@@ -2,11 +2,13 @@ package com.example.libapp
 
 class HomeController {
 
+    BookService bookService
+
     def index() {
       if (!(session['student'])) {
         redirect controller: 'public'
       } else {
-        def bookList = Book.list sort: 'price', order: 'desc'
+        def bookList = bookService.getBooksOrderBy('price', 'desc')
         [bookList: bookList]
       }
     }
@@ -29,4 +31,10 @@ class HomeController {
       [book: book]
     }
 
+    def transfer(Long to, Long bookId) {
+      Student s = session['student']
+      s.attach()
+
+      bookService.transferBook(s, to, bookId)
+    }
 }
